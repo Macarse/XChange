@@ -104,7 +104,9 @@ public class MtGoxWebSocketDemo {
         @Override
         public void run() {
             // Put ("api_key", "secret")
-            SocketMsgFactory socketMsgFactory = new SocketMsgFactory("", "");
+            SocketMsgFactory socketMsgFactory = new SocketMsgFactory("",
+                    "",
+                Currencies.JPY);
 
             String oid = "";
 
@@ -150,16 +152,16 @@ public class MtGoxWebSocketDemo {
                             streamingExchangeService.send(msgToSend);
 
                             //LimitOrder: "I want to sell 0.01 BTC at $600"
-                            //streamingExchangeService.send(
-                              //      socketMsgFactory.addOrder(Order.OrderType.ASK,
-                                //            MoneyUtils.parseMoney("USD", 600f),
-                                  //          new BigDecimal(0.01)));
+                            streamingExchangeService.send(
+                                    socketMsgFactory.addOrder(Order.OrderType.ASK,
+                                            MoneyUtils.parseMoney("JPY", 666666f),
+                                            new BigDecimal(0.01)));
 
 
                             //LimitOrder: "I want to buy 10 BTC at $5"
-                            //streamingExchangeService.send(
-                              //      socketMsgFactory.addOrder(Order.OrderType.BID,
-                                //            MoneyUtils.parseMoney("USD", 5f), new BigDecimal(10)));
+                            streamingExchangeService.send(
+                                   socketMsgFactory.addOrder(Order.OrderType.BID,
+                                         MoneyUtils.parseMoney("JPY", 20f), new BigDecimal(10)));
 
                             break;
 
