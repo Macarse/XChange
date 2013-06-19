@@ -48,6 +48,11 @@ public enum ExchangeEventType {
    */
   ERROR,
 
+  /**
+   * Represents an error condition
+   */
+  ERROR_INVALID_CALL,
+
   // Generic message types
   /**
    * A message encoding some plain text
@@ -110,6 +115,11 @@ public enum ExchangeEventType {
    * A message sent when a user order is cancelled
    */
   USER_ORDER_CANCELED,
+
+  /**
+   * A message sent when a user order is not found
+   */
+   USER_ORDER_NOT_FOUND,
 
   /**
    * A message with the wallet update

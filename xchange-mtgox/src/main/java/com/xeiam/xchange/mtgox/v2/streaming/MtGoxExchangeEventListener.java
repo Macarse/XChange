@@ -140,6 +140,22 @@ public class MtGoxExchangeEventListener extends ExchangeEventListener {
             }
 
         }  else if ( "remark".equals(operation) ) {
+
+
+            Boolean success = (Boolean) rawJSON.get("success");
+            if ( !success ) {
+                String msg = (String) rawJSON.get("message");
+
+                if ( msg.equals("Order not found")) {
+                    ExchangeEvent userOrderCanceledEvent = new DefaultExchangeEvent(ExchangeEventType.USER_ORDER_NOT_FOUND, exchangeEvent.getData(), rawJSON.get("message"));
+                    addToEventQueue(userOrderCanceledEvent);
+                    break;
+                } else if ( msg.equals("Invalid call") ) {
+                    ExchangeEvent errorEvent = new DefaultExchangeEvent(ExchangeEventType.ERROR_INVALID_CALL, exchangeEvent.getData(), null);
+                    addToEventQueue(errorEvent);
+                }
+            }
+
             System.out.println("Msg from server: " + rawJSON.toString());
             break;
         }
